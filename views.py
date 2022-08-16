@@ -146,3 +146,4 @@ def pythonquiz(request):
     questions = [q1, q2, q3, q4, q5]
 
     return HttpResponse(json.dumps(questions), content_type='application/json')
+# hjh
