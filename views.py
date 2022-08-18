@@ -1,4 +1,5 @@
 import json
+import requests
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -146,4 +147,24 @@ def pythonquiz(request):
     questions = [q1, q2, q3, q4, q5]
 
     return HttpResponse(json.dumps(questions), content_type='application/json')
-# hjh
+
+
+def bookssearch(request):
+    searchValue = ""
+    b={}
+    if request.GET:
+        searchValue = request.GET["searchValue"]
+
+        path = "https://www.googleapis.com/books/v1/volumes?q={0}".format(searchValue)
+        # print(path)
+        url = requests.get(path)
+        # print(response.json())
+        books = json.loads(url.text)
+        print(len(books), type(books))
+        # for book in books:
+        #     print(book)
+        # b = json.dumps(books)
+        b = books["items"]
+        print(b)
+    return render(request, "bookslist.html", {"books": b,"searchValue":searchValue})
+    # return HttpResponse(json.dumps(books), content_type='application/json')

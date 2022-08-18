@@ -25,5 +25,6 @@ urlpatterns = [
     path("quiz/", views.quiz),
     path("birthday/", views.birthday),
     path("pythonquiz/", views.pythonquiz),
+    path("booklist/",views.bookssearch),
 
 ]
