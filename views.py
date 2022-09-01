@@ -1,6 +1,6 @@
 import json
-import requests
 
+import requests
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -133,7 +133,6 @@ def birthday(request):
 
 
 def pythonquiz(request):
-
     q1 = {"question": "What is C?", "op1": "Language", "op2": "Alphabet", "op3": "Ascii character",
           "op4": "All of these", "correct": "a"}
     q2 = {"question": "Who developed Python Programming language?", "op1": "Wick van rossum", "op2": "Dennis Ritchie",
@@ -151,7 +150,7 @@ def pythonquiz(request):
 
 def bookssearch(request):
     searchValue = ""
-    b={}
+    b = {}
     if request.GET:
         searchValue = request.GET["searchValue"]
 
@@ -166,5 +165,71 @@ def bookssearch(request):
         # b = json.dumps(books)
         b = books["items"]
         print(b)
-    return render(request, "bookslist.html", {"books": b,"searchValue":searchValue})
+    return render(request, "bookslist.html", {"books": b, "searchValue": searchValue})
     # return HttpResponse(json.dumps(books), content_type='application/json')
+
+
+def selflink(request):
+    path = request.GET["path"]
+    print(path, "")
+    url = requests.get(path)
+    bookselflink = json.loads(url.text)
+    # print(len(bookselflink))
+    return render(request, "selflink.html", {"books": bookselflink})
+    # return HttpResponse(json.dumps(bookselflink), content_type='application/json')
+
+
+def swapi(request):
+    path = "https://swapi.dev/api/people/1/"
+    url = requests.get(path)
+    data = json.loads(url.text)
+    return render(request, "swapi.html", {"data": data})
+
+
+def films(request):
+    path = request.GET["path"]
+    url = requests.get(path)
+    data = json.loads(url.text)
+    return render(request, "films.html", {"data": data})
+
+def people(request):
+    path = request.GET["path"]
+    # print(path, "")
+    url = requests.get(path)
+    data = json.loads(url.text)
+    # print(len(bookselflink))
+    return render(request, "swapi.html", {"data": data})
+    # return HttpResponse(json.dumps(data), content_type='application/json')
+
+def vehicles(request):
+    path = request.GET["path"]
+    url = requests.get(path)
+    data = json.loads(url.text)
+    return render(request, "vehicles.html", {"data": data})
+
+def starships(request):
+    path = request.GET["path"]
+    # print(path, "")
+    url = requests.get(path)
+    data = json.loads(url.text)
+    # print(len(bookselflink))
+    return render(request, "starships.html", {"data": data})
+    # return HttpResponse(json.dumps(data), content_type='application/json')
+
+def planets(request):
+    path = request.GET["path"]
+    # print(path, "")
+    url = requests.get(path)
+    data = json.loads(url.text)
+    # print(len(bookselflink))
+    return render(request, "planet.html", {"data": data})
+    # return HttpResponse(json.dumps(data), content_type='application/json')
+
+def species(request):
+    path = request.GET["path"]
+    # print(path, "")
+    url = requests.get(path)
+    data = json.loads(url.text)
+    # print(len(bookselflink))
+    return render(request, "species.html", {"data": data})
+    # return HttpResponse(json.dumps(data), content_type='application/json')
